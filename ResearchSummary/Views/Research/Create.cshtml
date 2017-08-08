@@ -1,0 +1,110 @@
+﻿@using MvcCheckBoxList.Model
+@model ResearchSummary.ViewModels.ResearchViewModel
+@{
+    ViewBag.Title = "Research Input";
+}
+
+<h2>Research</h2>
+
+@using (Html.BeginForm("Create", "Research", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Measure Condition</label>
+        <div class="col-sm-10 checkbox">
+            @Html.CheckBoxListFor(m => m.PostedMeasures,
+                m => m.AvailableMeasures,
+                x => x.Id,
+                x => x.Name,
+                m => m.SelectedMeasures,
+                Position.Vertical)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Treatment</label>
+        <div class="col-sm-10 radio">
+            @foreach (var m in Model.Treatments)
+            {
+                <div class="col-sm-10">
+                    @Html.RadioButtonFor(t => t.Treatment, m.Id)
+                    @Html.Label(m.Name)
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Subjects</label>
+        <div class="col-sm-10 radio">
+            @foreach (var m in Model.Subjects)
+            {
+                <div class="col-sm-10">
+                    @Html.RadioButtonFor(t => t.Subject, m.Id)
+                    @Html.Label(m.Name)
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Study Design</label>
+        <div class="col-sm-10 radio">
+            @foreach (var m in Model.Studies)
+            {
+                <div class="col-sm-10">
+                    @Html.RadioButtonFor(t => t.Study, m.Id)
+                    @Html.Label(m.Name)
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Year of Publication</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.PubDateTime, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Abstract Summary</label>
+        <div class="col-sm-10">
+            @Html.TextAreaFor(m => m.AbstractSummary, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Authors</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Journal</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Journal, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">PubMed Link</label>
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Link, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+}
+
+@*<form class="form-horizontal">
+    
+</form>*@

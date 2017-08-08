@@ -40,6 +40,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -161,6 +165,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,12 +173,44 @@
     <Compile Include="Migrations\201708041955502_InitialModel.Designer.cs">
       <DependentUpon>201708041955502_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708042107502_CreateResearchTable.cs" />
+    <Compile Include="Migrations\201708042107502_CreateResearchTable.Designer.cs">
+      <DependentUpon>201708042107502_CreateResearchTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708050012495_UpdateResearchTable_1.cs" />
+    <Compile Include="Migrations\201708050012495_UpdateResearchTable_1.Designer.cs">
+      <DependentUpon>201708050012495_UpdateResearchTable_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708071938445_AddUserName.cs" />
+    <Compile Include="Migrations\201708071938445_AddUserName.Designer.cs">
+      <DependentUpon>201708071938445_AddUserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708080030350_AddResearchMeasureConditions.cs" />
+    <Compile Include="Migrations\201708080030350_AddResearchMeasureConditions.Designer.cs">
+      <DependentUpon>201708080030350_AddResearchMeasureConditions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708080059445_AddTables.cs" />
+    <Compile Include="Migrations\201708080059445_AddTables.Designer.cs">
+      <DependentUpon>201708080059445_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708080105237_UpdateResearch.cs" />
+    <Compile Include="Migrations\201708080105237_UpdateResearch.Designer.cs">
+      <DependentUpon>201708080105237_UpdateResearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MeasureCondition.cs" />
+    <Compile Include="Models\Research.cs" />
+    <Compile Include="Models\ResearchMeasureCondition.cs" />
+    <Compile Include="Models\Study.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Treatment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ResearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -231,6 +268,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Research\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +283,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708041955502_InitialModel.resx">
       <DependentUpon>201708041955502_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708042107502_CreateResearchTable.resx">
+      <DependentUpon>201708042107502_CreateResearchTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708050012495_UpdateResearchTable_1.resx">
+      <DependentUpon>201708050012495_UpdateResearchTable_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708071938445_AddUserName.resx">
+      <DependentUpon>201708071938445_AddUserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708080030350_AddResearchMeasureConditions.resx">
+      <DependentUpon>201708080030350_AddResearchMeasureConditions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708080059445_AddTables.resx">
+      <DependentUpon>201708080059445_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708080105237_UpdateResearch.resx">
+      <DependentUpon>201708080105237_UpdateResearch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
