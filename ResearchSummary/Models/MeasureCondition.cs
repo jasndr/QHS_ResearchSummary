@@ -10,6 +10,6 @@ namespace ResearchSummary.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Research> Researchs { get; set; }
+        public ICollection<ResearchMeasureCondition> ResearchMeasureConditions { get; set; }
     }
 }

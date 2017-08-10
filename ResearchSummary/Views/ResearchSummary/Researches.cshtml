@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ResearchSummary.Models.Research>
+@{
+    ViewBag.Title = "Researches";
+}
+
+<h2>Researches</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Treatment</th>
+                <th>Subject</th>
+                <th>Study Design</th>
+                <th>Outcome</th>
+                <th>Abstract</th>
+                <th>Authors</th>
+                <th>PubMed</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var research in Model)
+                {
+                    <tr>
+                        <td>@research.Id</td>
+                        <td>@research.Title</td>
+                        <th>@research.Treatment.Name</th>
+                        <th>@research.Subject.Name</th>
+                        <th>@research.Study.Name</th>
+                        <th>@research.Outcome.Name</th>
+                        <th>@research.AbstractSummary</th>
+                        <th>@research.Author</th>
+                        <th>@research.Link</th>
+                        <td>@Html.ActionLink("Edit", "Edit", "Research", new { Id = research.Id }, new { @class = "btn glyphicon glyphicon-pencil" })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*<div class="panel panel-default pre-scrollable">
+    <table class="table table-striped table-bordered table-responsive table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Treatment</th>
+                <th>Subject</th>
+                <th>Study Design</th>
+                <th>Outcome</th>
+                <th>Abstract</th>
+                <th>Authors</th>
+                <th>PubMed</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:Persons">
+            <tr>
+                <td>
+                    <span data-bind="text:PersonId"></span>
+                </td>
+                <td>
+                    <span data-bind="text:FirstName"></span>
+                </td>
+                <td>
+                    <span data-bind="text:LastName"></span>
+                </td>
+                <td>
+                    <span data-bind="text:City"></span>
+                </td>
+                <td>
+                    <span data-bind="text:State"></span>
+                </td>
+                <td>
+                    <span data-bind="text:MobileNo"></span>
+                </td>
+                <td>
+                    <span data-bind="text:MobileNo"></span>
+                </td>
+                <td>
+                    <span data-bind="text:MobileNo"></span>
+                </td>
+                <td>
+                    <span data-bind="text:MobileNo"></span>
+                </td>
+                <td>
+                    <button class="btn glyphicon glyphicon-pencil" data-bind="click:$root.getSelected" ></button>
+                </td>
+                <td>
+                    <button class="glyphicon glyphicon-trash" data-bind="click:$root.delete" ></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>*@
+  

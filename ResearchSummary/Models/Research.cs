@@ -24,10 +24,11 @@ namespace ResearchSummary.Models
         public string AbstractSummary { get; set; }
 
         public ApplicationUser Creator { get; set; }
+        public string CreatorId { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        public ICollection<MeasureCondition> MeasureConditions { get; set; }
+        public ICollection<ResearchMeasureCondition> ResearchMeasureConditions { get; set; }
 
         public Treatment Treatment { get; set; }
         public byte TreatmentId { get; set; }
@@ -37,6 +38,9 @@ namespace ResearchSummary.Models
 
         public Study Study { get; set; }
         public byte StudyId { get; set; }
+
+        public Outcome Outcome { get; set; }
+        public byte OutcomeId { get; set; }
 
     }
     

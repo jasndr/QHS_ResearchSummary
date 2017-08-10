@@ -65,6 +65,12 @@ namespace ResearchSummary.Migrations
                 new Study() { Id = 3, Name = "Meta-analysis" },
                 new Study() { Id = 4, Name = "Systematic Review" }
                 );
+
+            context.Outcomes.AddOrUpdate(x => x.Id,
+                new Outcome() { Id = 1, Name = "Significant effect" },
+                new Outcome() { Id = 2, Name = "Moderate effect" },
+                new Outcome() { Id = 3, Name = "No effect" }
+                );
         }
     }
 }

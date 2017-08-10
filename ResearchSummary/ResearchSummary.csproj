@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResearchController.cs" />
+    <Compile Include="Controllers\ResearchSummaryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,12 +198,29 @@
     <Compile Include="Migrations\201708080105237_UpdateResearch.Designer.cs">
       <DependentUpon>201708080105237_UpdateResearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708081856067_UpdateResearch1.cs" />
+    <Compile Include="Migrations\201708081856067_UpdateResearch1.Designer.cs">
+      <DependentUpon>201708081856067_UpdateResearch1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708081927482_AddTable080801.cs" />
+    <Compile Include="Migrations\201708081927482_AddTable080801.Designer.cs">
+      <DependentUpon>201708081927482_AddTable080801.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708082138157_UpdateMeasureCondition0808.cs" />
+    <Compile Include="Migrations\201708082138157_UpdateMeasureCondition0808.Designer.cs">
+      <DependentUpon>201708082138157_UpdateMeasureCondition0808.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708091909264_UpdateMeasureCondition080901.cs" />
+    <Compile Include="Migrations\201708091909264_UpdateMeasureCondition080901.Designer.cs">
+      <DependentUpon>201708091909264_UpdateMeasureCondition080901.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeasureCondition.cs" />
+    <Compile Include="Models\Outcome.cs" />
     <Compile Include="Models\Research.cs" />
     <Compile Include="Models\ResearchMeasureCondition.cs" />
     <Compile Include="Models\Study.cs" />
@@ -210,6 +228,7 @@
     <Compile Include="Models\Treatment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ResearchSummaryViewModel.cs" />
     <Compile Include="ViewModels\ResearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +288,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Research\Create.cshtml" />
+    <Content Include="Views\ResearchSummary\Researches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -301,6 +321,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708080105237_UpdateResearch.resx">
       <DependentUpon>201708080105237_UpdateResearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708081856067_UpdateResearch1.resx">
+      <DependentUpon>201708081856067_UpdateResearch1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708081927482_AddTable080801.resx">
+      <DependentUpon>201708081927482_AddTable080801.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708082138157_UpdateMeasureCondition0808.resx">
+      <DependentUpon>201708082138157_UpdateMeasureCondition0808.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708091909264_UpdateMeasureCondition080901.resx">
+      <DependentUpon>201708091909264_UpdateMeasureCondition080901.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
