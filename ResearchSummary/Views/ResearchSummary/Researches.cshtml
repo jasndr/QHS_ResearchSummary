@@ -6,35 +6,32 @@
 <h2>Researches</h2>
 
 <div class="row">
-    <div class="col-md-12">
-        <table class="table table-striped">
+    <div class="">
+        <table class="table table-hover table-striped">
             <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Treatment</th>
-                <th>Subject</th>
-                <th>Study Design</th>
-                <th>Outcome</th>
-                <th>Abstract</th>
-                <th>Authors</th>
-                <th>PubMed</th>
-            </tr>
+                <tr>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-4">Title</th>
+                    <th class="col-md-1">Treatment</th>
+                    <th class="col-md-1">Subject</th>
+                    <th class="col-md-1">Study</th>
+                    <th class="col-md-1">Outcome</th>
+                    <th class="col-md-1">PubMed</th>
+                    <th class="col-md-1"></th>
+                </tr>
             </thead>
             <tbody>
                 @foreach (var research in Model)
                 {
                     <tr>
-                        <td>@research.Id</td>
-                        <td>@research.Title</td>
-                        <th>@research.Treatment.Name</th>
-                        <th>@research.Subject.Name</th>
-                        <th>@research.Study.Name</th>
-                        <th>@research.Outcome.Name</th>
-                        <th>@research.AbstractSummary</th>
-                        <th>@research.Author</th>
-                        <th>@research.Link</th>
-                        <td>@Html.ActionLink("Edit", "Edit", "Research", new { Id = research.Id }, new { @class = "btn glyphicon glyphicon-pencil" })</td>
+                        <td class="col-md-1">@research.Id</td>
+                        <td class="col-md-4">@research.Title</td>
+                        <td class="col-md-1">@research.Treatment.Name</td>
+                        <td class="col-md-1">@research.Subject.Name</td>
+                        <td class="col-md-1">@research.Study.Name</td>
+                        <td class="col-md-1">@research.Outcome.Name</td>
+                        <td class="col-md-1">@research.Outcome.Name</td>
+                        <td class="col-md-1">@Html.ActionLink("Edit", "Edit", "Research", new { Id = research.Id }, new { @class = "btn glyphicon glyphicon-pencil" })</td>
                     </tr>
                 }
             </tbody>

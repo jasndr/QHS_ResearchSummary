@@ -123,6 +123,52 @@ namespace ResearchSummary.Controllers
         [HttpPost]
         public ActionResult Update(ResearchViewModel viewModel)
         {
+            var research = _context.Researchs
+                .Include(r => r.ResearchMeasureConditions)
+                .FirstOrDefault(r => r.Id == viewModel.Id);
+
+            if (research != null)
+            {
+                var postedMeasures = viewModel.PostedMeasures;
+                var currentMeasures = research.ResearchMeasureConditions.Select(m => m.MeasureConditionId).ToArray();
+
+                var addedMeasures = postedMeasures.Except(currentMeasures);
+                foreach (var added in addedMeasures)
+                {
+                    _context.ResearchMeasureConditions.Add(new ResearchMeasureCondition
+                    {
+                        ResearchId = research.Id,
+                        MeasureConditionId = added
+                    });
+                }
+
+                var deletedMeasures = currentMeasures.Except(postedMeasures);
+                foreach (var deleted in deletedMeasures)
+                {
+                    var researchMeasure =
+                        _context.ResearchMeasureConditions.FirstOrDefault(
+                            m => m.ResearchId == research.Id && m.MeasureConditionId == deleted);
+                    if (researchMeasure != null)
+                        _context.ResearchMeasureConditions.Remove(researchMeasure);
+                }
+
+                research.CreatorId = User.Identity.GetUserId();
+                research.CreationDate = DateTime.Now;
+                research.Title = viewModel.Title;
+                research.Author = viewModel.Author;
+                research.Journal = viewModel.Journal;
+                research.PubDateTime = Convert.ToDateTime(viewModel.PubDateTime);
+                research.Link = viewModel.Link;
+                research.SubjectId = viewModel.Subject;
+                research.StudyId = viewModel.Study;
+                research.TreatmentId = viewModel.Treatment;
+                research.OutcomeId = viewModel.Outcome;
+                research.AbstractSummary = viewModel.AbstractSummary;
+
+
+                _context.SaveChanges();
+            }
+
             return RedirectToAction("Index", "Home");
         }
     }

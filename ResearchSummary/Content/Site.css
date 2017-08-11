@@ -46,3 +46,28 @@ input,textarea {
 .checkbox {
     padding-left: 35px;
 }
+
+/*tr {display: block; }
+th, td { width: 300px; }
+tbody { display: block; height: 100px; overflow: auto;}*/
+
+.table-fixheader {
+    position: relative;
+    padding-top: 40px;
+}
+.table-fixheader>div {
+    height:150px;
+    overflow-y:auto;
+}
+.table-fixheader thead{
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+.table-fixheader thead tr{
+    position: absolute;
+    width: 100%;
+}
+.table-fixheader thead tr th{
+    display:inline-block;
+}
