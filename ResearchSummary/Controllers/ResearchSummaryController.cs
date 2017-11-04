@@ -25,10 +25,12 @@ namespace ResearchSummary.Controllers
                 .Include(r => r.ResearchMeasureConditions)
                 .Include(r => r.Treatment)
                 .Include(r => r.Subject)
-                .Include(r => r.Study)
+                .Include(r => r.ResearchStudies)
                 .Include(r => r.Outcome)
                 .ToList();
 
+            //todo, convert to view model
+            
             return View(researches);
         }
     }

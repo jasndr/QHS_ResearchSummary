@@ -21,11 +21,21 @@ namespace ResearchSummary
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/bootstrap-table/bootstrap-table.min.js",
+                      "~/Scripts/moment.js",
+                      "~/Scripts/bootbox.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap-table.min.css",
+                      "~/Content/site.css",
+                      "~/Content/bootstrap-datetimepicker.min.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/ko").Include(
+                        "~/Scripts/knockout-3.4.2.js",
+                        "~/Scripts/knockout.mapping-latest.js"));
         }
     }
 }

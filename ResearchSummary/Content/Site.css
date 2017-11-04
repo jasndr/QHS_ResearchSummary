@@ -24,9 +24,13 @@ textarea {
 }
 
 /* Override bootstrap*/
+.jumbotron {
+    margin-top: 1em;
+}
+
 .navbar-inverse {
-    background-color: #15C89D;
-    border-color: #15C89D;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
 }
 
 .navbar-inverse .navbar-brand {
@@ -37,11 +41,7 @@ textarea {
     color: #fff;
 }
 
-input,textarea {
-    max-width: 380px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+
 
 .checkbox {
     padding-left: 35px;
@@ -70,4 +70,33 @@ tbody { display: block; height: 100px; overflow: auto;}*/
 }
 .table-fixheader thead tr th{
     display:inline-block;
+}
+
+/*bootstrap-table*/
+.fixed-table-toolbar .search.search {
+    margin-top: 0;
+}
+
+/*span {
+    display: inline-block;
+    width: 250px;
+    padding-bottom: 0.5em
+}*/
+.radio label, .checkbox label {
+    padding-left: 10px;
+    width: 288px;
+    padding-bottom: 0.5em
+}
+
+input,textarea {
+    max-width: 600px;
+    margin-bottom: 0.5em;
+}
+
+.fixed-table-toolbar .columns, .fixed-table-toolbar .search {
+    margin-top: 0;
+}
+
+.panel {
+    margin-top: 1em;
 }

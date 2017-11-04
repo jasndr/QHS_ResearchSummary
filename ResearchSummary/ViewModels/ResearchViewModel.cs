@@ -33,11 +33,18 @@ namespace ResearchSummary.ViewModels
         public byte Subject { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
 
-        public byte Study { get; set; }
-        public IEnumerable<Study> Studies { get; set; }
+        //public byte Study { get; set; }
+        //public IEnumerable<Study> Studies { get; set; }
+
+        public IEnumerable<Study> AvailableStudies { get; set; }
+
+        public IEnumerable<Study> SelectedStudies { get; set; }
+        public int[] PostedStudies { get; set; }
 
         public byte Outcome { get; set; }
         public IEnumerable<Outcome> Outcomes { get; set; }
+
+        public string OutcomeResult { get; set; }
 
         public string PubDateTime { get; set; }
 
@@ -45,7 +52,12 @@ namespace ResearchSummary.ViewModels
 
         public string Link { get; set; }
 
-        public Research Research { get; set; }
+        public string CancerType { get; set; }
+
+        public string OtherCondition { get; set; }
+
+
+        //public Research Research { get; set; }
 
         public string Action
         {

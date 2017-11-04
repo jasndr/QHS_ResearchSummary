@@ -8,7 +8,7 @@ namespace ResearchSummary.ViewModels
 {
     public class ResearchSummaryViewModel
     {
-        public IEnumerable<Research> Researches { get; set; }
+        public IEnumerable<ResearchViewModel> Researches { get; set; }
         
         public bool HasRecords()
         {

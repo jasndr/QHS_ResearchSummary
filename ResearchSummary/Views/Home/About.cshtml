@@ -5,3 +5,18 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<div id="aboutPage">
+    {{ message }}
+</div>
+@section scripts
+{
+    <script>
+        var aboutPage = new Vue({
+            el: '#aboutPage',
+            data: {
+                message: 'Hello Vue! in About Page'
+            }
+        });
+    </script>
+}

@@ -4,121 +4,210 @@
     ViewBag.Title = "Research Input";
 }
 
-<h2>Research</h2>
+<div class="panel panel-info">
+    <div class="panel-heading"><strong>Research</strong></div>
+    <div class="panel-body">
+        @using (Html.BeginForm(Model.Action, "Research", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                </div>
+            </div>
 
-@using (Html.BeginForm(Model.Action, "Research", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-        </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Disease/Condition</label>
+                <div class="col-sm-10 checkbox">
+                    @{
+                        var htmlListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 3, null, TextLayout.Default, TemplateIsUsed.Yes);
+                        @Html.CheckBoxListFor(m => m.PostedMeasures,
+                            m => m.AvailableMeasures,
+                            c => c.Id,
+                            c => c.Name,
+                            m => m.SelectedMeasures,
+                            htmlListInfo)
+                    }
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    @Html.TextBoxFor(t => t.CancerType, new { @class = "form-control js-cancer-type", style = "display:none;", placeholder = "Cancer type" })
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    @Html.TextBoxFor(t => t.OtherCondition, new { @class = "form-control js-other-condition", style = "display:none;", placeholder = "Other condition" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Study Design (check all that apply)</label>
+                <div class="col-sm-10 checkbox">
+                    @{
+                        var studyListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 3, null, TextLayout.Default, TemplateIsUsed.Yes);
+                        @Html.CheckBoxListFor(m => m.PostedStudies,
+                            m => m.AvailableStudies,
+                            c => c.Id,
+                            c => c.Name,
+                            m => m.SelectedStudies,
+                            studyListInfo)
+                    }
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Treatment</label>
+                <div class="col-sm-10 radio">
+                    @foreach (var m in Model.Treatments)
+                    {
+                        <div class="col-sm-10">
+                            @Html.RadioButtonFor(t => t.Treatment, m.Id)
+                            @Html.Label(m.Name)
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Subjects</label>
+                <div class="col-sm-10 radio">
+                    @foreach (var m in Model.Subjects)
+                    {
+                        <div class="col-sm-10">
+                            @Html.RadioButtonFor(t => t.Subject, m.Id)
+                            @Html.Label(m.Name)
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Outcome of study</label>
+                <div class="col-sm-10 radio">
+                    @foreach (var m in Model.Outcomes)
+                    {
+                        <div class="col-sm-10">
+                            @Html.RadioButtonFor(t => t.Outcome, m.Id)
+                            @Html.Label(m.Name)
+
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    @Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:none;", placeholder = "Outcome result" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Year of Publication</label>
+                <div class="col-sm-10">
+                    <div class='input-group'>
+                        @Html.TextBoxFor(m => m.PubDateTime, new { @class = "form-control", id = "datetimepicker1" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.PubDateTime)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Abstract Summary</label>
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.AbstractSummary, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Authors</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Journal</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Journal, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">PubMed Link</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Link, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(m => m.Id, new { @class = "form-control research-id" })
+            </div>
+            if (User.Identity.IsAuthenticated)
+            {
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            }
+
+        }
     </div>
+</div>
     
-    <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">Measure Condition</label>
-        <div class="col-sm-10 checkbox">
-            @Html.CheckBoxListFor(m => m.PostedMeasures,
-                m => m.AvailableMeasures,
-                x => x.Id,
-                x => x.Name,
-                m => m.SelectedMeasures,
-                Position.Vertical)
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-sm-2 control-label">Treatment</label>
-        <div class="col-sm-10 radio">
-            @foreach (var m in Model.Treatments)
-            {
-                <div class="col-sm-10">
-                    @Html.RadioButtonFor(t => t.Treatment, m.Id)
-                    @Html.Label(m.Name)
-                </div>
+@Html.Hidden("RedirectTo", Url.Action("Researches", "ResearchSummary"));
+@*<div>
+    @{Html.RenderPartial("Alert");}
+</div>*@
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if ('@(TempData["message"])' != null && '@(TempData["message"])' != '') {
+                bootbox.alert({
+                    message: '@(TempData["message"])',
+                    callback: function () {
+                        console.log('This was logged in the callback!');
+                        var url = $("#RedirectTo").val();
+                        location.href = url;
+                    }
+                });
             }
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-sm-2 control-label">Subjects</label>
-        <div class="col-sm-10 radio">
-            @foreach (var m in Model.Subjects)
-            {
-                <div class="col-sm-10">
-                    @Html.RadioButtonFor(t => t.Subject, m.Id)
-                    @Html.Label(m.Name)
-                </div>
+
+            if ($("input[name='PostedMeasures'][value=5]").is(':checked')) {
+                $(".js-cancer-type").show();
             }
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-sm-2 control-label">Study Design</label>
-        <div class="col-sm-10 radio">
-            @foreach (var m in Model.Studies)
-            {
-                <div class="col-sm-10">
-                    @Html.RadioButtonFor(t => t.Study, m.Id)
-                    @Html.Label(m.Name)
-                </div>
+
+            if ($("input[name='PostedMeasures'][value=24]").is(':checked')) {
+                $(".js-other-condition").show();
             }
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="" class="col-sm-2 control-label">Outcome of study</label>
-        <div class="col-sm-10 radio">
-            @foreach (var m in Model.Outcomes)
-            {
-                <div class="col-sm-10">
-                    @Html.RadioButtonFor(t => t.Outcome, m.Id)
-                    @Html.Label(m.Name)
-                </div>
+
+            if ($("input[name='Outcome']:checked").length > 0) {
+                $("input[name='OutcomeResult']").show();
             }
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Year of Publication</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.PubDateTime, new { @class = "form-control" })
-        </div>
-    </div>
+            $("input[name='Outcome']").click(function () {
+                $("input[name='OutcomeResult']").show();
+            });
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Abstract Summary</label>
-        <div class="col-sm-10">
-            @Html.TextAreaFor(m => m.AbstractSummary, new { @class = "form-control" })
-        </div>
-    </div>
+            $("input[name='PostedMeasures'][value=5]").click(function () {
+                if ($(this).is(':checked')) {
+                    $(".js-cancer-type").show();
+                } else {
+                    $(".js-cancer-type").hide();
+                }
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Authors</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
-        </div>
-    </div>
+            });
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Journal</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Journal, new { @class = "form-control" })
-        </div>
-    </div>
+            $("input[name='PostedMeasures'][value=24]").click(function () {
+                if ($(this).is(':checked')) {
+                    $(".js-other-condition").show();
+                } else {
+                    $(".js-other-condition").hide();
+                }
 
-    <div class="form-group">
-        <label class="col-sm-2 control-label">PubMed Link</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Link, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.HiddenFor(m => m.Id, new { @class = "form-control research-id" })
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
+            });
+
+            $('#datetimepicker1').datetimepicker({
+                format: 'MM/DD/YYYY'
+            });
+        });
+    </script>
 }
 
-@*<form class="form-horizontal">
-    
-</form>*@
+

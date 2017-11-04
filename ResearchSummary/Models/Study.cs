@@ -8,7 +8,7 @@ namespace ResearchSummary.Models
 {
     public class Study
     {
-        public byte Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

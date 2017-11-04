@@ -36,11 +36,15 @@ namespace ResearchSummary.Models
         public Subject Subject { get; set; }
         public byte SubjectId { get; set; }
 
-        public Study Study { get; set; }
-        public byte StudyId { get; set; }
+        public ICollection<ResearchStudy> ResearchStudies { get; set; }
 
         public Outcome Outcome { get; set; }
         public byte OutcomeId { get; set; }
+        public string OutcomeResult { get; set; }
+
+        public string CancerType { get; set; }
+
+        public string OtherCondition { get; set; }
 
     }
     
