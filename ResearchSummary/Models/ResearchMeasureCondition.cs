@@ -15,9 +15,27 @@ namespace ResearchSummary.Models
         [Key, Column(Order = 2)]
         public int MeasureConditionId { get; set; }
 
-        public Research Research { get; set; }
+        public Research Research { get; private set; }
 
-        public MeasureCondition MeasureCondition { get; set; }
+        public MeasureCondition MeasureCondition { get; private set; }
+
+        protected ResearchMeasureCondition()
+        {
+        }
+        public ResearchMeasureCondition(Research research, MeasureCondition measureCondition)
+        {
+            if (research == null)
+            {
+                throw new ArgumentNullException("researchesearch");
+            }
+            if (measureCondition == null)
+            {
+                throw  new ArgumentNullException("measureCondition");
+            }
+
+            Research = research;
+            MeasureCondition = measureCondition;
+        }
 
     }
 }

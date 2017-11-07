@@ -453,7 +453,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Research\Create.cshtml" />
+    <Content Include="Views\Research\ResearchForm.cshtml" />
     <Content Include="Views\ResearchSummary\Researches.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MeasureCondition.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Study.cshtml" />

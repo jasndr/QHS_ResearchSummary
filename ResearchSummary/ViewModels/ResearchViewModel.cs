@@ -71,6 +71,42 @@ namespace ResearchSummary.ViewModels
                 return (action.Body as MethodCallExpression).Method.Name;
             }
         }
+
+        public ResearchViewModel()
+        {
+        }
+
+        public ResearchViewModel(Research research, 
+            IEnumerable<MeasureCondition> availableMeasures, 
+            IEnumerable<MeasureCondition> selectedMeasures, 
+            IEnumerable<Treatment> treatments,
+            IEnumerable<Subject> subjects,
+            IEnumerable<Outcome> outcomes,
+            IEnumerable<Study> availableStudie,
+            IEnumerable<Study> selectedStudies
+            )
+        {
+            Id = research.Id;
+            Title = research.Title;
+            AvailableMeasures = availableMeasures;
+            SelectedMeasures = selectedMeasures;
+            Treatments = treatments;
+            Subjects = subjects;
+            AvailableStudies = availableStudie;
+            SelectedStudies = selectedStudies;
+            Outcomes = outcomes;
+            Treatment = research.TreatmentId;
+            Subject = research.SubjectId;
+            Outcome = research.OutcomeId;
+            OutcomeResult = research.OutcomeResult;
+            PubDateTime = research.PubDateTime.ToShortDateString();
+            AbstractSummary = research.AbstractSummary;
+            Author = research.Author;
+            Journal = research.Journal;
+            Link = research.Link;
+            CancerType = research.CancerType;
+            OtherCondition = research.OtherCondition;
+        }
         
     }
 }

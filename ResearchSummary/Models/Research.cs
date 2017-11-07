@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -46,6 +47,21 @@ namespace ResearchSummary.Models
 
         public string OtherCondition { get; set; }
 
+        public Research()
+        {
+            ResearchMeasureConditions = new Collection<ResearchMeasureCondition>();
+            ResearchStudies = new Collection<ResearchStudy>();
+        }
+
+        public void AddMeasure(MeasureCondition measureCondition)
+        {
+            ResearchMeasureConditions.Add(new ResearchMeasureCondition(this, measureCondition));
+        }
+
+        public void DeleteMeasure(int measureId)
+        {
+            ResearchMeasureConditions.Remove(ResearchMeasureConditions.Single(m => m.MeasureConditionId == measureId));
+        }
     }
     
 }
