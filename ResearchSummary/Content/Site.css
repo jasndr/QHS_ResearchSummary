@@ -42,7 +42,6 @@ textarea {
 }
 
 
-
 .checkbox {
     padding-left: 35px;
 }
@@ -89,7 +88,7 @@ tbody { display: block; height: 100px; overflow: auto;}*/
 }
 
 input,textarea {
-    max-width: 600px;
+    max-width: 800px;
     margin-bottom: 0.5em;
 }
 
@@ -99,4 +98,8 @@ input,textarea {
 
 .panel {
     margin-top: 1em;
+}
+
+input[type=date], input[type=datetime-local], input[type=email], input[type=number], input[type=password], input[type=search-md], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], textarea.md-textarea  {
+    font-size: 2rem;
 }

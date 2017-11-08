@@ -9,10 +9,10 @@
     <div class="panel-body">
         @using (Html.BeginForm(Model.Action, "Research", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
-            <div class="form-group">
+            <div class="form-group form-lg">
                 <label for="" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "" })
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label for="" class="col-sm-2 control-label">Outcome of study</label>
                 <div class="col-sm-10 radio">
                     @foreach (var m in Model.Outcomes)
@@ -90,6 +90,20 @@
                 </div>
                 <div class="col-sm-10 col-sm-offset-2">
                     @Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:none;", placeholder = "Outcome result" })
+                </div>
+            </div>*@
+
+           
+            
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Outcome of study</label>
+                <div class="col-sm-8">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success"><span>Positive&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Positive Outcome result" })</li>
+                        <li class="list-group-item list-group-item-info"><span>No&emsp;&emsp;&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "No Outcome result" })</li>
+                         <li class="list-group-item list-group-item-warning"><span>Negative&nbsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Negative Outcome result" })</li>
+                    </ul>
+
                 </div>
             </div>
 
@@ -106,7 +120,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Abstract Summary</label>
                 <div class="col-sm-10">
-                    @Html.TextAreaFor(m => m.AbstractSummary, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.AbstractSummary, new { @class = "form-control" })
                 </div>
             </div>
 
@@ -177,13 +191,13 @@
                 $(".js-other-condition").show();
             }
 
-            if ($("input[name='Outcome']:checked").length > 0) {
-                $("input[name='OutcomeResult']").show();
-            }
+            //if ($("input[name='Outcome']:checked").length > 0) {
+            //    $("input[name='OutcomeResult']").show();
+            //}
 
-            $("input[name='Outcome']").click(function () {
-                $("input[name='OutcomeResult']").show();
-            });
+            //$("input[name='Outcome']").click(function () {
+            //    $("input[name='OutcomeResult']").show();
+            //});
 
             $("input[name='PostedMeasures'][value=5]").click(function () {
                 if ($(this).is(':checked')) {
@@ -209,5 +223,3 @@
         });
     </script>
 }
-
-

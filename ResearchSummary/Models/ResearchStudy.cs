@@ -11,8 +11,18 @@ namespace ResearchSummary.Models
         [Key, Column(Order = 2)]
         public int StudyId { get; set; }
 
-        public Research Research { get; set; }
+        public Research Research { get; private set; }
 
-        public Study Study { get; set; }
+        public Study Study { get; private set; }
+
+        public ResearchStudy()
+        {
+        }
+
+        public ResearchStudy(Research research, Study study)
+        {
+            Research = research;
+            Study = study;
+        }
     }
 }

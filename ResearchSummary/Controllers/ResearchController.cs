@@ -29,16 +29,7 @@ namespace ResearchSummary.Controllers
                 _context.Treatments.ToList(), _context.Subjects.ToList(), _context.Outcomes.ToList(),
                  _context.Studies.ToList(), new List<Study>()
             );
-            //{
-            //    AvailableMeasures = _context.MeasureConditions.ToList(),
-            //    SelectedMeasures = new List<MeasureCondition>(),
-            //    Treatments = _context.Treatments.ToList(),
-            //    Subjects = _context.Subjects.ToList(),
-            //    AvailableStudies = _context.Studies.ToList(),
-            //    SelectedStudies = new List<Study>(),
-            //    Outcomes = _context.Outcomes.ToList()
-            //};
-
+            
             var test = _context.Researchs
                          .Include(r => r.ResearchMeasureConditions)
                          .FirstOrDefault(r => r.Id == 2);
@@ -50,51 +41,21 @@ namespace ResearchSummary.Controllers
         [HttpPost]
         public ActionResult Create(ResearchViewModel viewModel)
         {
-            var research = new Research
-            {
-                CreatorId = User.Identity.GetUserId(),
-                CreationDate = DateTime.Now,
-                Title = viewModel.Title,
-                Author = viewModel.Author,
-                Journal = viewModel.Journal,
-                PubDateTime = Convert.ToDateTime(viewModel.PubDateTime),
-                Link = viewModel.Link,
-                SubjectId = viewModel.Subject,
-                //StudyId = viewModel.Study,
-                TreatmentId = viewModel.Treatment,
-                OutcomeId = viewModel.Outcome,
-                OutcomeResult = viewModel.OutcomeResult,
-                AbstractSummary = viewModel.AbstractSummary,
-                CancerType = viewModel.CancerType,
-                OtherCondition = viewModel.OtherCondition
-                //MeasureConditions = viewModel.PostedMeasures != null ? _context.MeasureConditions.Where(m => viewModel.PostedMeasures.Contains(m.Id)).ToList() : null
-            };
-
+            var userId = User.Identity.GetUserId();
             var addedMeasures = _context.MeasureConditions.Where(m => viewModel.PostedMeasures.Contains(m.Id));
-            foreach (var measureCondition in addedMeasures)
-            {
-                research.AddMeasure(measureCondition);
-                //_context.ResearchMeasureConditions.Add(new ResearchMeasureCondition
-                //{
-                //    Research = research,
-                //    MeasureConditionId = measureCondition
-                //});
-            }
+            var addedStudies = _context.Studies.Where(s => viewModel.PostedStudies.Contains(s.Id));
 
-            foreach (var study in viewModel.PostedStudies)
-            {
-                _context.ResearchStudies.Add(new ResearchStudy
-                {
-                    Research = research,
-                    StudyId = study
-                });
-            }
-
+            var research = new Research();
+            research.Update(userId, viewModel, addedMeasures, new List<int>(), addedStudies, new List<int>() );
             _context.Researchs.Add(research);
             _context.SaveChanges();
-            
-            //return RedirectToAction("Researches", "ResearchSummary");
-            return View("Alert");
+
+            TempData["message"] = "A New Research is created!";
+           
+            InitViewModel(viewModel);
+
+            ModelState.Clear();
+            return View("ResearchForm", viewModel);
         }
 
         //[Authorize]
@@ -125,30 +86,6 @@ namespace ResearchSummary.Controllers
 
                     var viewModel = new ResearchViewModel(research, availableMeasures, selectedMeasures,
                         treatments, subjects, outcomes, availableStudies, selectedStudies);
-                        
-                    //{
-                    //    Id = research.Id,
-                    //    Title = research.Title,
-                    //    AvailableMeasures = _context.MeasureConditions.ToList(),
-                    //    SelectedMeasures = _context.MeasureConditions.Where(m => selectedMeasureList.Contains(m.Id)).ToList(),
-                    //    Treatments = _context.Treatments.ToList(),
-                    //    Subjects = _context.Subjects.ToList(),
-                    //    AvailableStudies = _context.Studies.ToList(),
-                    //    SelectedStudies = _context.Studies.Where(s => selectedStudyList.Contains(s.Id)).ToList(),
-                    //    Outcomes = _context.Outcomes.ToList(),
-                    //    Treatment = research.TreatmentId,
-                    //    Subject = research.SubjectId,
-                    //    //Study = research.StudyId,
-                    //    Outcome = research.OutcomeId,
-                    //    OutcomeResult = research.OutcomeResult,
-                    //    PubDateTime = research.PubDateTime.ToShortDateString(),
-                    //    AbstractSummary = research.AbstractSummary,
-                    //    Author = research.Author,
-                    //    Journal = research.Journal,
-                    //    Link = research.Link,
-                    //    CancerType = research.CancerType,
-                    //    OtherCondition = research.OtherCondition
-                    //};
 
                     return View("ResearchForm", viewModel);
                 }
@@ -170,90 +107,43 @@ namespace ResearchSummary.Controllers
             {
                 var postedMeasures = viewModel.PostedMeasures;
                 var currentMeasures = research.ResearchMeasureConditions.Select(m => m.MeasureConditionId).ToArray();
-
                 var addedMeasuresIds = postedMeasures.Except(currentMeasures);
                 var addedMeasures = _context.MeasureConditions.Where(m => addedMeasuresIds.Contains(m.Id));
-                foreach (var addedMeasure in addedMeasures)
-                {
-                    research.AddMeasure(addedMeasure);
-                    //_context.ResearchMeasureConditions.Add(new ResearchMeasureCondition
-                    //{
-                    //    ResearchId = research.Id,
-                    //    MeasureConditionId = added
-                    //});
-                }
-
                 var deletedMeasures = currentMeasures.Except(postedMeasures);
-                foreach (var deleted in deletedMeasures)
-                {
-                    research.DeleteMeasure(deleted);
-                    //var researchMeasure =
-                    //    _context.ResearchMeasureConditions.FirstOrDefault(
-                    //        m => m.ResearchId == research.Id && m.MeasureConditionId == deleted);
-                    //if (researchMeasure != null)
-                    //    _context.ResearchMeasureConditions.Remove(researchMeasure);
-                }
 
                 var postedStudies = viewModel.PostedStudies;
                 var currentStudies = research.ResearchStudies.Select(m => m.StudyId).ToArray();
+                var addedStudiesIds = postedStudies.Except(currentStudies);
+                var addedStudies = _context.Studies.Where(s => addedStudiesIds.Contains(s.Id));
+                var deletedStudies = currentStudies.Except(postedStudies);
 
-                var addedStudies = postedStudies.Except(currentStudies);
-                foreach (var added in addedStudies)
-                {
-                    _context.ResearchStudies.Add(new ResearchStudy
-                    {
-                        ResearchId = research.Id,
-                        StudyId = added
-                    });
-                }
-
-                var deletedStudies= currentStudies.Except(postedStudies);
-                foreach (var deleted in deletedStudies)
-                {
-                    var researchStudy =
-                        _context.ResearchStudies.FirstOrDefault(
-                            m => m.ResearchId == research.Id && m.StudyId == deleted);
-                    if (researchStudy != null)
-                        _context.ResearchStudies.Remove(researchStudy);
-                }
-
-                research.CreatorId = User.Identity.GetUserId();
-                research.CreationDate = DateTime.Now;
-                research.Title = viewModel.Title;
-                research.Author = viewModel.Author;
-                research.Journal = viewModel.Journal;
-                research.PubDateTime = Convert.ToDateTime(viewModel.PubDateTime);
-                research.Link = viewModel.Link;
-                research.SubjectId = viewModel.Subject;
-                //research.StudyId = viewModel.Study;
-                research.TreatmentId = viewModel.Treatment;
-                research.OutcomeId = viewModel.Outcome;
-                research.OutcomeResult = viewModel.OutcomeResult;
-                research.AbstractSummary = viewModel.AbstractSummary;
-                research.CancerType = viewModel.CancerType;
-                research.OtherCondition = viewModel.OtherCondition;
+                var userId = User.Identity.GetUserId();
+                research.Update(userId, viewModel, addedMeasures, deletedMeasures, addedStudies, deletedStudies);
                 
                 _context.SaveChanges();
             }
 
             TempData["message"] = "Research is saved!";
-            //return RedirectToAction("Researches", "ResearchSummary");
-            
             //works, but feel wired
             //return RedirectToAction("Create");
             //return RedirectToAction("Create", "Research", "Add");
 
+            InitViewModel(viewModel);
+
+            ModelState.Clear();
+            return View("ResearchForm", viewModel);
+
+            //return RedirectToAction("Researches", "ResearchSummary");
+            //return PartialView("Alert");
+        }
+
+        private void InitViewModel(ResearchViewModel viewModel)
+        {
             viewModel.AvailableMeasures = _context.MeasureConditions.ToList();
             viewModel.AvailableStudies = _context.Studies.ToList();
             viewModel.Outcomes = _context.Outcomes.ToList();
             viewModel.Treatments = _context.Treatments.ToList();
             viewModel.Subjects = _context.Subjects.ToList();
-
-            ModelState.Clear();
-            //ResearchViewModel testingModel = new ResearchViewModel();
-            return View("ResearchForm", viewModel);
-
-            //return PartialView("Alert");
         }
     }
 }
