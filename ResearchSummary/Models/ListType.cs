@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ResearchSummary.Models
 {
-    public class Subject
+    public class ListType
     {
         public byte Id { get; set; }
 

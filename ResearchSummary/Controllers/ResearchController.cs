@@ -26,13 +26,10 @@ namespace ResearchSummary.Controllers
             var model = new ResearchViewModel(
                 new Research(), 
                 _context.MeasureConditions.ToList(), new List<MeasureCondition>(),
-                _context.Treatments.ToList(), _context.Subjects.ToList(), _context.Outcomes.ToList(),
+                _context.Treatments.ToList(), _context.ListTypes.ToList(), 
                  _context.Studies.ToList(), new List<Study>()
             );
-            
-            var test = _context.Researchs
-                         .Include(r => r.ResearchMeasureConditions)
-                         .FirstOrDefault(r => r.Id == 2);
+            model.PubDateTime = DateTime.Today.ToShortDateString();
 
             return View("ResearchForm", model);
         }
@@ -80,12 +77,12 @@ namespace ResearchSummary.Controllers
                     var selectedStudies = research.ResearchStudies.Select(s => s.Study);
 
                     var treatments = _context.Treatments.ToList();
-                    var subjects = _context.Subjects.ToList();
-                    var outcomes = _context.Outcomes.ToList();
+                    var subjects = _context.ListTypes.ToList();
+                    //var outcomes = _context.Outcomes.ToList();
                     var availableStudies = _context.Studies.ToList();
 
                     var viewModel = new ResearchViewModel(research, availableMeasures, selectedMeasures,
-                        treatments, subjects, outcomes, availableStudies, selectedStudies);
+                        treatments, subjects, availableStudies, selectedStudies);
 
                     return View("ResearchForm", viewModel);
                 }
@@ -141,9 +138,9 @@ namespace ResearchSummary.Controllers
         {
             viewModel.AvailableMeasures = _context.MeasureConditions.ToList();
             viewModel.AvailableStudies = _context.Studies.ToList();
-            viewModel.Outcomes = _context.Outcomes.ToList();
+            //viewModel.Outcomes = _context.Outcomes.ToList();
             viewModel.Treatments = _context.Treatments.ToList();
-            viewModel.Subjects = _context.Subjects.ToList();
+            viewModel.ListTypes = _context.ListTypes.ToList();
         }
     }
 }

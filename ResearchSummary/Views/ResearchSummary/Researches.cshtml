@@ -32,9 +32,9 @@
                     <td class="col-md-1">@research.Id</td>
                     <td class="col-md-4">@research.Title</td>
                     <td class="col-md-1">@research.Treatment.Name</td>
-                    <td class="col-md-1">@research.Subject.Name</td>
+                    <td class="col-md-1">@research.ListType.Name</td>
                     <td class="col-md-1">@research.PubDateTime.ToString("d")</td>
-                    <td class="col-md-1">@research.Outcome.Name</td>
+                    <td class="col-md-1">@research.PositiveOutcome</td>
                     <td class="col-md-1"><a href=@research.Link target="_blank">Link</a></td>
                     <td class="col-md-1">@Html.ActionLink("Edit", "Edit", "Research", new { Id = research.Id }, new { @class = "btn glyphicon glyphicon-pencil" })</td>
                 </tr>

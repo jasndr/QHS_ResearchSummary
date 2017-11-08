@@ -12,10 +12,10 @@ namespace ResearchSummary.Models
         public DbSet<MeasureCondition> MeasureConditions { get; set; }
         public DbSet<ResearchMeasureCondition> ResearchMeasureConditions { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<ListType> ListTypes { get; set; }
         public DbSet<Study> Studies { get; set; }
         public DbSet<ResearchStudy> ResearchStudies { get; set; }
-        public DbSet<Outcome> Outcomes { get; set; }
+        //public DbSet<Outcome> Outcomes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

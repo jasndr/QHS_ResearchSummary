@@ -84,7 +84,8 @@ tbody { display: block; height: 100px; overflow: auto;}*/
 .radio label, .checkbox label {
     padding-left: 10px;
     width: 288px;
-    padding-bottom: 0.5em
+    padding-bottom: 0.5em;
+    margin-bottom:0.5em;
 }
 
 input,textarea {
@@ -100,6 +101,3 @@ input,textarea {
     margin-top: 1em;
 }
 
-input[type=date], input[type=datetime-local], input[type=email], input[type=number], input[type=password], input[type=search-md], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], textarea.md-textarea  {
-    font-size: 2rem;
-}

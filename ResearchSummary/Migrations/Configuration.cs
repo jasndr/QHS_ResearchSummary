@@ -85,13 +85,14 @@ namespace ResearchSummary.Migrations
                 new Treatment() { Id = 3, Name = "Diet" }
                 );
 
-            context.Subjects.AddOrUpdate(x => x.Id,
-                new Subject() { Id = 1, Name = "Prisoners" },
-                new Subject() { Id = 2, Name = "Health professionals" },
-                new Subject() { Id = 3, Name = "Children" },
-                new Subject() { Id = 4, Name = "Seniors" },
-                new Subject() { Id = 5, Name = "Youth" },
-                new Subject() { Id = 6, Name = "Women" }
+            context.ListTypes.AddOrUpdate(x => x.Id,
+                new ListType() { Id = 1, Name = "Students" },
+                new ListType() { Id = 2, Name = "Health professionals" },
+                new ListType() { Id = 3, Name = "Children" },
+                new ListType() { Id = 4, Name = "Seniors" },
+                new ListType() { Id = 5, Name = "Youth" },
+                new ListType() { Id = 6, Name = "Women" },
+                new ListType() { Id = 99, Name = "Other" }
                 );
 
             context.Studies.AddOrUpdate(x => x.Id,
@@ -120,11 +121,11 @@ namespace ResearchSummary.Migrations
                 new Study() { Id = 23, Name = "Meta-analysis" }
                 );
 
-            context.Outcomes.AddOrUpdate(x => x.Id,
-                new Outcome() { Id = 1, Name = "Significant effect" },
-                new Outcome() { Id = 2, Name = "Moderate effect" },
-                new Outcome() { Id = 3, Name = "No effect" }
-                );
+            //context.Outcomes.AddOrUpdate(x => x.Id,
+            //    new Outcome() { Id = 1, Name = "Significant effect" },
+            //    new Outcome() { Id = 2, Name = "Moderate effect" },
+            //    new Outcome() { Id = 3, Name = "No effect" }
+            //    );
         }
     }
 }

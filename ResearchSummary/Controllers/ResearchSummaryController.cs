@@ -24,9 +24,9 @@ namespace ResearchSummary.Controllers
             var researches = _context.Researchs
                 .Include(r => r.ResearchMeasureConditions)
                 .Include(r => r.Treatment)
-                .Include(r => r.Subject)
+                .Include(r => r.ListType)
                 .Include(r => r.ResearchStudies)
-                .Include(r => r.Outcome)
+                //.Include(r => r.Outcome)
                 .ToList();
 
             //todo, convert to view model

@@ -34,14 +34,14 @@ namespace ResearchSummary.Models
         public Treatment Treatment { get; set; }
         public byte TreatmentId { get; set; }
 
-        public Subject Subject { get; set; }
-        public byte SubjectId { get; set; }
+        public ListType ListType { get; set; }
+        public byte ListTypeId { get; set; }
 
         public ICollection<ResearchStudy> ResearchStudies { get; set; }
 
-        public Outcome Outcome { get; set; }
-        public byte OutcomeId { get; set; }
-        public string OutcomeResult { get; set; }
+        //public Outcome Outcome { get; set; }
+        //public byte OutcomeId { get; set; }
+        //public string OutcomeResult { get; set; }
 
         public string CancerType { get; set; }
 
@@ -84,13 +84,32 @@ namespace ResearchSummary.Models
             Journal = viewModel.Journal;
             PubDateTime = Convert.ToDateTime(viewModel.PubDateTime);
             Link = viewModel.Link;
-            SubjectId = viewModel.Subject;
+            ListTypeId = viewModel.ListTypeId;
+            ListTypeOther = viewModel.ListTypeOther;
             TreatmentId = viewModel.Treatment;
-            OutcomeId = viewModel.Outcome;
-            OutcomeResult = viewModel.OutcomeResult;
+            TreatmentOther = viewModel.TreatmentOther;
             AbstractSummary = viewModel.AbstractSummary;
             CancerType = viewModel.CancerType;
             OtherCondition = viewModel.OtherCondition;
+
+            SubjectFemale = viewModel.SubjectFemale;
+            SubjectMale = viewModel.SubjectMale;
+            SubjectAgeFrom = viewModel.SubjectAgeFrom;
+            SubjectAgeTo = viewModel.SubjectAgeTo;
+            TreatmentFemale = viewModel.TreatmentFemale;
+            TreatmentMale = viewModel.TreatmentMale;
+            TreatmentAgeFrom = viewModel.TreatmentAgeFrom;
+            TreatmentAgeTo = viewModel.TreatmentAgeTo;
+            ControlFemale = viewModel.ControlFemale;
+            ControlMale = viewModel.ControlMale;
+            ControlAgeFrom = viewModel.ControlAgeFrom;
+            ControlAgeTo = viewModel.ControlAgeTo;
+            Dosage = viewModel.Dosage;
+            Duration = viewModel.Duration;
+            DurationUnit = viewModel.DurationUnit;
+            PositiveOutcome = viewModel.PositiveOutcome;
+            NoOutcome = viewModel.NoOutcome;
+            NegativeOutcome = viewModel.NegativeOutcome;
             
             foreach (var addedMeasure in addedMeasures)
             {
@@ -112,6 +131,27 @@ namespace ResearchSummary.Models
                 DeleteStudy(deleted);
             }
         }
+        
+        public int? SubjectFemale { get; set; }
+        public int? SubjectMale { get; set; }
+        public int? SubjectAgeFrom { get; set; }
+        public int? SubjectAgeTo { get; set; }
+        public int? TreatmentFemale { get; set; }
+        public int? TreatmentMale { get; set; }
+        public int? TreatmentAgeFrom { get; set; }
+        public int? TreatmentAgeTo { get; set; }
+        public int? ControlFemale { get; set; }
+        public int? ControlMale { get; set; }
+        public int? ControlAgeFrom { get; set; }
+        public int? ControlAgeTo { get; set; }
+        public string ListTypeOther { get; set; }
+        public string TreatmentOther { get; set; }
+        public int? Dosage { get; set; }
+        public int? Duration { get; set; }
+        public DurationUnit DurationUnit { get; set; }
+        public string PositiveOutcome { get; set; }
+        public string NoOutcome { get; set; }
+        public string NegativeOutcome { get; set; }
 
     }
     

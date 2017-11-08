@@ -1,7 +1,12 @@
 ﻿@using MvcCheckBoxList.Model
+@using ResearchSummary.Models
 @model ResearchSummary.ViewModels.ResearchViewModel
 @{
     ViewBag.Title = "Research";
+}
+@section AddtoHead {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/Content/Override.css" rel="stylesheet" />
 }
 
 <div class="panel panel-info">
@@ -13,6 +18,7 @@
                 <label for="" class="col-sm-2 control-label">Title</label>
                 <div class="col-sm-10">
                     @Html.TextBoxFor(m => m.Title, new { @class = "" })
+                    @Html.ValidationMessageFor(m => m.Title)
                 </div>
             </div>
 
@@ -36,76 +42,6 @@
                     @Html.TextBoxFor(t => t.OtherCondition, new { @class = "form-control js-other-condition", style = "display:none;", placeholder = "Other condition" })
                 </div>
             </div>
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">Study Design (check all that apply)</label>
-                <div class="col-sm-10 checkbox">
-                    @{
-                        var studyListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 3, null, TextLayout.Default, TemplateIsUsed.Yes);
-                        @Html.CheckBoxListFor(m => m.PostedStudies,
-                            m => m.AvailableStudies,
-                            c => c.Id,
-                            c => c.Name,
-                            m => m.SelectedStudies,
-                            studyListInfo)
-                    }
-                </div>
-
-            </div>
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">Treatment</label>
-                <div class="col-sm-10 radio">
-                    @foreach (var m in Model.Treatments)
-                    {
-                        <div class="col-sm-10">
-                            @Html.RadioButtonFor(t => t.Treatment, m.Id)
-                            @Html.Label(m.Name)
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">Subjects</label>
-                <div class="col-sm-10 radio">
-                    @foreach (var m in Model.Subjects)
-                    {
-                        <div class="col-sm-10">
-                            @Html.RadioButtonFor(t => t.Subject, m.Id)
-                            @Html.Label(m.Name)
-                        </div>
-                    }
-                </div>
-            </div>
-
-            @*<div class="form-group">
-                <label for="" class="col-sm-2 control-label">Outcome of study</label>
-                <div class="col-sm-10 radio">
-                    @foreach (var m in Model.Outcomes)
-                    {
-                        <div class="col-sm-10">
-                            @Html.RadioButtonFor(t => t.Outcome, m.Id)
-                            @Html.Label(m.Name)
-
-                        </div>
-                    }
-                </div>
-                <div class="col-sm-10 col-sm-offset-2">
-                    @Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:none;", placeholder = "Outcome result" })
-                </div>
-            </div>*@
-
-           
-            
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">Outcome of study</label>
-                <div class="col-sm-8">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-success"><span>Positive&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Positive Outcome result" })</li>
-                        <li class="list-group-item list-group-item-info"><span>No&emsp;&emsp;&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "No Outcome result" })</li>
-                         <li class="list-group-item list-group-item-warning"><span>Negative&nbsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Negative Outcome result" })</li>
-                    </ul>
-
-                </div>
-            </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Year of Publication</label>
@@ -116,7 +52,7 @@
                     @Html.ValidationMessageFor(m => m.PubDateTime)
                 </div>
             </div>
-
+            
             <div class="form-group">
                 <label class="col-sm-2 control-label">Abstract Summary</label>
                 <div class="col-sm-10">
@@ -144,9 +80,157 @@
                     @Html.TextBoxFor(m => m.Link, new { @class = "form-control" })
                 </div>
             </div>
+
             <div class="form-group">
-                @Html.HiddenFor(m => m.Id, new { @class = "form-control research-id" })
+                <label for="" class="col-sm-2 control-label">Study Design (check all that apply)</label>
+                <div class="col-sm-10 checkbox">
+                    @{
+                        var studyListInfo = new HtmlListInfo(HtmlTag.vertical_columns, 3, null, TextLayout.Default, TemplateIsUsed.Yes);
+                        @Html.CheckBoxListFor(m => m.PostedStudies,
+                                        m => m.AvailableStudies,
+                                        c => c.Id,
+                                        c => c.Name,
+                                        m => m.SelectedStudies,
+                                        studyListInfo)
+                                }
+                </div>
+
             </div>
+            @*<div class="form-group">
+                <label for="" class="col-sm-2 control-label">Treatment</label>
+                <div class="col-sm-10 radio">
+                    @foreach (var m in Model.Treatments)
+                    {
+                        <div class="col-sm-10">
+                            @Html.RadioButtonFor(t => t.Treatment, m.Id)
+                            @Html.Label(m.Name)
+                        </div>
+                    }
+                </div>
+            </div>*@
+            @*<div class="form-group">
+                <label for="" class="col-sm-2 control-label">Subjects</label>
+                <div class="col-sm-10 radio">
+                    @foreach (var m in Model.Subjects)
+                    {
+                        <div class="col-sm-10">
+                            @Html.RadioButtonFor(t => t.Subject, m.Id)
+                            @Html.Label(m.Name)
+                        </div>
+                    }
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Outcome of study</label>
+                    <div class="col-sm-10 radio">
+                        @foreach (var m in Model.Outcomes)
+                        {
+                            <div class="col-sm-10">
+                                @Html.RadioButtonFor(t => t.Outcome, m.Id)
+                                @Html.Label(m.Name)
+
+                            </div>
+                        }
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2">
+                        @Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:none;", placeholder = "Outcome result" })
+                    </div>
+                </div>*@
+            
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Subject</label>
+                <div class="col-sm-2">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span>Females</span>@Html.TextBoxFor(t => t.SubjectFemale, new {@class = "form-control", style = "display:initial;"})
+                        </li>
+                        <li class="list-group-item">
+                            <span>Males</span>@Html.TextBoxFor(t => t.SubjectMale, new {@class = "form-control", style = "display:initial;"})
+                        </li>
+                        <li class="list-group-item">
+                            <span>Ages</span>@Html.TextBoxFor(t => t.SubjectAgeFrom, new { @class = "form-control", style = "display:initial;"})
+                            <span>To</span>@Html.TextBoxFor(t => t.SubjectAgeTo, new { @class = "form-control", style = "display:initial;"})
+                        </li>
+                    </ul>
+                </div>
+                <label for="" class="col-sm-1 control-label">Treatment</label>
+                <div class="col-sm-2">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span>Females</span>@Html.TextBoxFor(t => t.TreatmentFemale, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                        <li class="list-group-item">
+                            <span>Males</span>@Html.TextBoxFor(t => t.TreatmentMale, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                        <li class="list-group-item">
+                            <span>Ages</span>@Html.TextBoxFor(t => t.TreatmentAgeFrom, new { @class = "form-control", style = "display:initial;" })
+                            <span>To</span>@Html.TextBoxFor(t => t.TreatmentAgeTo, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                    </ul>
+                </div>
+                <label for="" class="col-sm-1 control-label">Control</label>
+                <div class="col-sm-2">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span>Females</span>@Html.TextBoxFor(t => t.ControlFemale, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                        <li class="list-group-item">
+                            <span>Males</span>@Html.TextBoxFor(t => t.ControlMale, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                        <li class="list-group-item">
+                            <span>Ages</span>@Html.TextBoxFor(t => t.ControlAgeFrom, new { @class = "form-control", style = "display:initial;" })
+                            <span>To</span>@Html.TextBoxFor(t => t.ControlAgeTo, new { @class = "form-control", style = "display:initial;" })
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">List Type</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.ListTypeId, new SelectList(Model.ListTypes, "Id", "Name"), "-- Select List Type --", new { @class = "form-control" })
+                </div>
+                <label class="col-sm-2 control-label js-list-other">Other</label>
+                <div class="col-sm-3 js-list-other">
+                    @Html.TextBoxFor(m => m.ListTypeOther, new { @class = "form-control" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Treatment</label>
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.Treatment, new SelectList(Model.Treatments, "Id", "Name"), "-- Select Treatment --", new { @class = "form-control" })
+                </div>
+                <label class="col-sm-2 control-label">Dose/Frequency</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.Dosage, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Dosage)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Duration</label>
+                <div class="col-sm-1">
+                    @Html.TextBoxFor(m => m.Duration, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-2">
+                    @Html.DropDownListFor(m => m.DurationUnit, new SelectList(Enum.GetValues(typeof(DurationUnit))), "-- Select Unit --", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">Outcome of study</label>
+                <div class="col-sm-8">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success"><span>Positive&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Positive Outcome result" })</li>
+                        <li class="list-group-item list-group-item-info"><span>No&emsp;&emsp;&emsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "No Outcome result" })</li>
+                        <li class="list-group-item list-group-item-warning"><span>Negative&nbsp;</span>@Html.TextBoxFor(t => t.OutcomeResult, new { @class = "form-control", style = "display:initial;", placeholder = "Negative Outcome result" })</li>
+                    </ul>
+                </div>
+            </div>
+            
+            @Html.HiddenFor(m => m.Id, new { @class = "form-control research-id" })
+           
             if (User.Identity.IsAuthenticated)
             {
                 <div class="form-group">
@@ -159,6 +243,8 @@
         }
     </div>
 </div>
+
+
     
 @Html.Hidden("RedirectTo", Url.Action("Researches", "ResearchSummary"));
 @*<div>
@@ -168,7 +254,7 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/js/mdb.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -215,6 +301,19 @@
                     $(".js-other-condition").hide();
                 }
 
+            });
+
+            if ($("#ListTypeId").val() == 99) {
+                $(".js-list-other").show();
+            } else {
+                $(".js-list-other").hide();
+            }
+            $("#ListTypeId").change(function() {
+                if ($("#ListTypeId").val() == 99) {
+                    $(".js-list-other").show();
+                } else {
+                    $(".js-list-other").hide();
+                }
             });
 
             $('#datetimepicker1').datetimepicker({
