@@ -49,9 +49,8 @@ namespace ResearchSummary.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -82,7 +81,8 @@ namespace ResearchSummary.Models
 
         [Required]
         [StringLength(128)]
-        public string Name { get; set; }
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
     }
 
     public class ResetPasswordViewModel
